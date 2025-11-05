@@ -14,7 +14,6 @@ typedef struct {
     char details[100];
 } Order;
 
-// Merge two sorted halves
 void merge(Order arr[], int l, int m, int r) {
     int n1 = m - l + 1, n2 = r - m;
     Order *L = malloc(n1 * sizeof(Order));
@@ -33,7 +32,6 @@ void merge(Order arr[], int l, int m, int r) {
     free(R);
 }
 
-// Recursive Merge Sort
 void mergeSort(Order arr[], int l, int r) {
     if (l >= r) return;
     int m = l + (r - l) / 2;
