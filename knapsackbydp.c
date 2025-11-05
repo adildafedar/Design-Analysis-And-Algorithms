@@ -1,4 +1,5 @@
-/*
+/*Adil Dafedar - 123B1F018
+ASSIGNMENT 6
 Scenario: Disaster Relief Resource Allocation
 
 Objective:
@@ -16,12 +17,10 @@ Approach:
 #include <stdio.h>
 #include <stdlib.h>
 
-// Function to find the maximum utility
 int knapsack(int W, int N, int weight[], int utility[], int taken[]) {
     int i, w;
     int dp[N + 1][W + 1];
 
-    // Initialize DP table
     for (i = 0; i <= N; i++) {
         for (w = 0; w <= W; w++) {
             if (i == 0 || w == 0) dp[i][w] = 0;
@@ -33,16 +32,15 @@ int knapsack(int W, int N, int weight[], int utility[], int taken[]) {
         }
     }
 
-    // Trace back to find which items were taken
     w = W;
     for (i = N; i > 0 && w > 0; i--) {
         if (dp[i][w] != dp[i - 1][w]) {
-            taken[i - 1] = 1; // item i-1 included
+            taken[i - 1] = 1; 
             w -= weight[i - 1];
         } else taken[i - 1] = 0;
     }
 
-    return dp[N][W]; // maximum utility value
+    return dp[N][W]; 
 }
 
 int main() {
