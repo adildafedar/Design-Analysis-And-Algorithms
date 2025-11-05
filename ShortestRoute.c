@@ -1,4 +1,5 @@
-/*
+/*Adil Dafedar - 123B1F018
+ASSIGNMENT 5
 Scenario: SwiftCargo Logistics Route Optimization
 
 SwiftCargo delivers packages across multiple cities organized in stages:
@@ -19,23 +20,18 @@ Goals:
 
 #define INF INT_MAX
 
-// Structure to represent an edge
 typedef struct {
     int u, v, cost;
 } Edge;
 
-// Function to find the minimum cost from source to destination
 void findOptimalRoute(int n, int e, Edge edges[], int source, int destination) {
-    int cost[n];        // DP array: cost[i] = min cost from i to destination
-    int next[n];        // Stores next node for path reconstruction
-
-    // Initialize cost array
+    int cost[n];        
+    int next[n];        
     for (int i = 0; i < n; i++) {
         cost[i] = (i == destination) ? 0 : INF;
         next[i] = -1;
     }
 
-    // Relax edges in reverse topological order (multistage property)
     for (int i = n - 2; i >= 0; i--) {
         for (int j = 0; j < e; j++) {
             if (edges[j].u == i && edges[j].v < n && cost[edges[j].v] != INF) {
@@ -48,10 +44,8 @@ void findOptimalRoute(int n, int e, Edge edges[], int source, int destination) {
         }
     }
 
-    // Output optimal cost
     printf("\nMinimum delivery cost from City %d to City %d = %d\n", source, destination, cost[source]);
 
-    // Display path
     printf("Optimal route: %d", source);
     int current = next[source];
     while (current != -1) {
@@ -81,7 +75,6 @@ int main() {
 
     findOptimalRoute(n, e, edges, source, destination);
 
-    // Example of real-time update (e.g., road closure or delay)
     int u, v, newCost;
     printf("\nUpdate route cost (u v newCost): ");
     scanf("%d %d %d", &u, &v, &newCost);
