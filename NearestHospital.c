@@ -20,13 +20,11 @@ Tasks:
 
 #define INF INT_MAX
 
-// Graph structure using adjacency matrix
 typedef struct {
-    int V;           // number of intersections
-    int **time;      // edge weights (travel times)
+    int V;           
+    int **time;     
 } Graph;
 
-// Create graph
 Graph* createGraph(int V) {
     Graph* g = malloc(sizeof(Graph));
     g->V = V;
@@ -39,7 +37,6 @@ Graph* createGraph(int V) {
     return g;
 }
 
-// Find vertex with minimum distance not yet visited
 int minDistance(int dist[], int visited[], int V) {
     int min = INF, min_index = -1;
     for (int v = 0; v < V; v++)
@@ -48,14 +45,12 @@ int minDistance(int dist[], int visited[], int V) {
     return min_index;
 }
 
-// Print the shortest path from source to destination
 void printPath(int parent[], int j) {
     if (parent[j] == -1) return;
     printPath(parent, parent[j]);
     printf(" -> %d", j);
 }
 
-// Dijkstra’s Algorithm
 void dijkstra(Graph* g, int src) {
     int V = g->V;
     int dist[V], visited[V], parent[V];
@@ -93,9 +88,8 @@ void dijkstra(Graph* g, int src) {
     }
 }
 
-// Update road time dynamically (e.g., due to traffic)
 void updateTraffic(Graph* g, int u, int v, int newTime) {
-    g->time[u][v] = g->time[v][u] = newTime; // undirected road
+    g->time[u][v] = g->time[v][u] = newTime; 
     printf("\nTraffic updated: Road %d <-> %d now takes %d minutes.\n", u, v, newTime);
 }
 
@@ -119,16 +113,13 @@ int main() {
 
     dijkstra(g, src);
 
-    // Example of dynamic traffic update
     int u, v, newTime;
     printf("\nUpdate a road's traffic (u v new_time): ");
     scanf("%d %d %d", &u, &v, &newTime);
     updateTraffic(g, u, v, newTime);
 
-    // Re-run Dijkstra to update shortest paths
     dijkstra(g, src);
 
-    // Cleanup
     for (int i = 0; i < V; i++) free(g->time[i]);
     free(g->time);
     free(g);
