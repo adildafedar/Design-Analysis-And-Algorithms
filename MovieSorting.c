@@ -18,22 +18,19 @@ As a backend engineer, you must:
 
 typedef struct {
     char title[100];
-    float rating;      // IMDB rating
-    int year;          // Release year
-    int popularity;    // Watch time popularity
+    float rating;      
+    int year;          
+    int popularity;    
 } Movie;
 
-// Global variable to control sorting parameter
 int sortChoice;
 
-// Compare two movies based on user's choice
 int compare(Movie a, Movie b) {
     if (sortChoice == 1) return (a.rating > b.rating);
     if (sortChoice == 2) return (a.year > b.year);
     return (a.popularity > b.popularity);
 }
 
-// Partition function for Quick Sort
 int partition(Movie arr[], int low, int high) {
     Movie pivot = arr[high];
     int i = low - 1;
@@ -51,7 +48,6 @@ int partition(Movie arr[], int low, int high) {
     return i + 1;
 }
 
-// Recursive Quick Sort
 void quickSort(Movie arr[], int low, int high) {
     if (low < high) {
         int pi = partition(arr, low, high);
