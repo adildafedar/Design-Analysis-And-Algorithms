@@ -19,34 +19,28 @@ Task:
 #include <stdio.h>
 #include <stdlib.h>
 
-// Structure for supply items
 typedef struct {
     char name[50];
     float weight, value;
-    int divisible; // 1 = can divide, 0 = must take whole
+    int divisible;
 } Item;
 
-// Comparator: Sort by value/weight ratio (descending)
 int compare(const void *a, const void *b) {
     float r1 = ((Item *)a)->value / ((Item *)a)->weight;
     float r2 = ((Item *)b)->value / ((Item *)b)->weight;
-    return (r2 > r1) - (r2 < r1); // descending order
-}
+    return (r2 > r1) - (r2 < r1);
 
-// Fractional Knapsack function
 float fractionalKnapsack(Item items[], int n, float capacity) {
     qsort(items, n, sizeof(Item), compare);
     float totalValue = 0.0;
 
     for (int i = 0; i < n && capacity > 0; i++) {
         if (items[i].weight <= capacity) {
-            // Take whole item
             capacity -= items[i].weight;
             totalValue += items[i].value;
             printf("Taken: %s (full)\n", items[i].name);
         } else {
             if (items[i].divisible) {
-                // Take fractional part
                 float fraction = capacity / items[i].weight;
                 totalValue += items[i].value * fraction;
                 printf("Taken: %s (%.2f%%)\n", items[i].name, fraction * 100);
